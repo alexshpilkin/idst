@@ -143,7 +143,7 @@ gc7 () {
 darwin () {
     CC=${CC:-"cc"}
     PREFIX=${PREFIX:-"/usr/local/lib/idc/$TARGET/"}
-    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Werror -fno-common"}
+    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Wno-error -fno-common"}
     OBJEXT_O=${OBJEXT_O:-".o"}
     CCFLAGS_O=${CCFLAGS_O:-"-c"}
     LDFLAGS_SO=${LDFLAGS_SO:-"-bundle -flat_namespace -undefined suppress"}
@@ -154,7 +154,7 @@ darwin () {
 bsd () {
     CC=${CC:-"cc"}
     PREFIX=${PREFIX:-"/usr/local/lib/idc/$TARGET/"}
-    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Werror -D_GNU_SOURCE=1"}
+    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Wno-error -D_GNU_SOURCE=1"}
     LDFLAGS=${LDFLAGS:-"-export-dynamic"}
     CCFLAGS_O=${CCFLAGS_O:-"-c"}
     OBJEXT_O=${OBJEXT_O:-".o"}
@@ -176,7 +176,7 @@ PIC () {
 cygwin () {
     CC=${CC:-"gcc"}
     PREFIX=${PREFIX:-"/usr/local/lib/idc/$TARGET/"}
-    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Werror"}
+    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Wno-error"}
     LDFLAGS=${LDFLAGS:-"-Wl,--export-all-symbols"}
     OBJEXT=${OBJEXT:-".exe"}
     CCFLAGS_O=${CCFLAGS_O:-"-c"}
@@ -189,7 +189,7 @@ cygwin () {
 mingw32 () {
     CC=${CC:-"gcc"}
     PREFIX=${PREFIX:-"/usr/local/lib/idc/$TARGET/"}
-    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Werror"}
+    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Wno-error"}
     MFLAGS="-mno-cygwin"
     LDFLAGS=${LDFLAGS:-"-Wl,--export-all-symbols"}
     CCFLAGS_O=${CCFLAGS_O:-"-c"}
@@ -203,16 +203,17 @@ mingw32 () {
 linux () {
     CC=${CC:-"cc"}
     PREFIX=${PREFIX:-"/usr/local/lib/idc/$TARGET/"}
-    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Werror -D_GNU_SOURCE=1 -Wno-unused-value"}
+    CFLAGS=${CFLAGS:-"-g -Wall -Wreturn-type -Wno-error -D_GNU_SOURCE=1 -Wno-unused-value"}
     LDFLAGS=${LDFLAGS:-"-export-dynamic"}
     LDLIBS=${LDLIBS:-"-ldl -lm -lpthread"}
+    LDLIBS_SO=${LDLIBS:-"-ldl -lm -lpthread"}
     CCFLAGS_O=${CCFLAGS_O:-"-c"}
     OBJEXT_O=${OBJEXT_O:-".o"}
     LDFLAGS_SO=${LDFLAGS_SO:-"-shared"}
     OBJEXT_SO=${OBJEXT_SO:-".so"}
     SYSOS="linux"
     LIBID_K_O="libid_k.o"
-    CCFLAGS_K=${CCFLAGS_K:-"-g -Wall -Wreturn-type -Werror -Wno-unused-value -nostdinc -I$IDST/system/include -DEMBEDDED=1 -D_GNU_SOURCE=1 -m32 -fno-strict-aliasing -fno-builtin -fno-stack-limit -fno-stack-protector"}
+    CCFLAGS_K=${CCFLAGS_K:-"-g -Wall -Wreturn-type -Wno-error -Wno-unused-value -nostdinc -I$IDST/system/include -DEMBEDDED=1 -D_GNU_SOURCE=1 -m32 -fno-strict-aliasing -fno-builtin -fno-stack-limit -fno-stack-protector"}
     LDFLAGS_K=${LDFLAGS_K:-"-nostdlib -Wl,-melf_i386 -Bstatic -N -Wl,-Ttext -Wl,0x100000 -Wl,--eh-frame-hdr -Wl,--hash-style=both"}
 }
 
