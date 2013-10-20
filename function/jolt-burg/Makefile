@@ -38,6 +38,7 @@ test : main$(OBJEXT) .FORCE
 
 main$(OBJEXT) : main.st $(LIBS)
 	$(IDC) $(OFLAGS) $(IDFLAGS) main.st $(LDLIBS) -o $@
+	if test -e /usr/sbin/execstack; then /usr/sbin/execstack -s $@; fi
 
 jolt.a : $(FILES) ../objects/objects.a
 	ar rcs $@.new $(FILES) ../objects/*.o
